@@ -1,6 +1,5 @@
 
 rm(list = ls())
-setwd("/hpc/group/dunsonlab/da252/sim_class")
 
 library(mvtnorm)
 library(truncnorm)
