@@ -1,6 +1,5 @@
 
 rm(list = ls())
-setwd("/Users/davideagnoletto/Dropbox/sim_martingales/code/application")
 
 load("ps_a.RData")
 
