@@ -1,6 +1,5 @@
 
 rm(list = ls())
-setwd("/Users/davideagnoletto/Dropbox/sim_martingales/code/regression")
 
 library(mvtnorm)
 library(truncnorm)
