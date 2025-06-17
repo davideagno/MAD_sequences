@@ -1,5 +1,5 @@
+
 rm(list = ls())
-setwd("/Users/davideagnoletto/Dropbox/sim_martingales/code")
 
 load("/regression/coverage_regr.RData")
 cv_regr <- cv_df
