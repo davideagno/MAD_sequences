@@ -1,6 +1,5 @@
 
 rm(list = ls())
-setwd("/Users/davideagnoletto/Dropbox/sim_martingales/code")
 
 library(TeachingDemos)
 library(ggplot2)
