@@ -11,8 +11,10 @@ Code and data for the analysis contained in [[1]](#1).
   - xx
 
 - #### Application
-  - xx
-  - xx
+  - [application.R](application.R) contains the analysis of Section 5. [predictive_resampling.R](predictive_resampling.R) contains the code for predictive resampling.
+  - [Functions_Corvids.R](Functions_Corvids.R) and [Functions_Corvids.cpp](Functions_Corvids.cpp) contains the R and Cpp functions for MAD seqeunces employed in the application, respectively.
+  - [post_processing_plots.R](post_processing_plots.R) and [post_processing_plots.R](post_processing_plots.R) contain the code for obtaining the related figures.
+  - [corvus_2009.csv](corvus_2009.csv) contains the train test; [corvus_2010.csv](corvus_2010.csv) contains the test set; [sites_loc_09.csv](sites_loc_09.csv) contains the geographical information for each location.
 
 - [Illustrative_Example.R](Illustrative_Example.R) replicate the illustrative example of Section 2.5.
 
