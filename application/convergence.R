@@ -50,12 +50,6 @@ for (k in 1:D) {
   interval[k] <- max(0, (extremes[2] - extremes[1]) / 2)
 }
 
-# set.seed(12345)
-# c_1 <- pred_res_4_FB_one_conv(p_n_vec, p_az, idx_nz, NROW(y), 10000, alpha, 0.75,
-#                              N_star, sigma_opt, delta_opt, supp, supp_temp,
-#                              supp_hab, interval)
-# plot(c_1, type = "l"); abline(v = 5000, lty = 2)    
-
 conv_appl <- matrix(nrow = 10000, ncol = 10)
 for (i in 1:10) {
   set.seed(i)
