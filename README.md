@@ -3,8 +3,10 @@
 Code and data for the analysis contained in [[1]](#1).
 
 - #### Regression
-  - xx
-  - xx
+   - [regr_ada.R](regr_ada.R), [regr_dpm.R](regr_dpm.R), [regr_1.R](regr_1.R), and [regr_23.R](regr_23.R) contain the R code for replicating the simulation study of Section 4.2 for MAD sequences with adaptive weigths, $w_n=(2n - 1) / (n^2 + n)$, $w_n=(\alpha +n )^{-1}$, and $w_n=(\alpha +n )^{-2/3}$, respectively.
+  - [Functions_Regr_ada.R](Functions_Regr_ada.R), [Functions_Regr_dpm.R](Functions_Regr_dpm.R), [Functions_Regr_1.R](Functions_Regr_1.R), and [Functions_Regr_23.R](Functions_Regr_23.R) contain the functions for MAD sequences with adaptive weigths, $w_n=(2n - 1) / (n^2 + n)$, $w_n=(\alpha +n )^{-1}$, and $w_n=(\alpha +n )^{-2/3}$, respectively. [Functions_Regr.cpp](Functions_Regr.cpp) contains useful Cpp functions.
+  - [regr_ada.R](class_DP.R) and [regr_glm_bart_rf.R](class_glm_bart_rf.R) contains the R code to replicate the competitors.
+  - [output_regr.R](output_regr.R) contains the code for obtaining the related tables.
 
 - #### Classification
   - [class_ada.R](class_ada.R), [class_dpm.R](class_dpm.R), and [class_lambda.R](class_lambda.R) contain the R code for replicating the simulation study of Section 4.2 for MAD sequences with adaptive weigths, $w_n=(2n - 1) / (n^2 + n)$, and $w_n=(\alpha +n )^{-\lambda}$, respectively.
@@ -14,8 +16,8 @@ Code and data for the analysis contained in [[1]](#1).
 
 - #### Application
   - [application.R](application.R) contains the analysis of Section 5. [predictive_resampling.R](predictive_resampling.R) contains the code for predictive resampling.
-  - [Functions_Corvids.R](Functions_Corvids.R) and [Functions_Corvids.cpp](Functions_Corvids.cpp) contains the R and Cpp functions for MAD seqeunces employed in the application, respectively.
-  - [post_processing_plots.R](post_processing_plots.R) and [post_processing_plots.R](post_processing_plots.R) contain the code for obtaining the related figures.
+  - [Functions_Corvids.R](Functions_Corvids.R), [Functions_Corvids_ps.R](Functions_Corvids_ps.R), [Functions_Corvids.cpp](Functions_Corvids.cpp), and [Functions_Corvids_2.cpp](Functions_Corvids_2.cpp) contains the R and Cpp functions for MAD seqeunces employed in the application.
+  - [post_processing_plots.R](post_processing_plots.R), [post_processing_plots.R](post_processing_plots.R), and [convergence.R](convergence.R) contain the code for obtaining the related figures.
   - [corvus_2009.csv](corvus_2009.csv) contains the train test; [corvus_2010.csv](corvus_2010.csv) contains the test set; [sites_loc_09.csv](sites_loc_09.csv) contains the geographical information for each location.
 
 - [Illustrative_Example.R](Illustrative_Example.R) replicate the illustrative example of Section 2.5.
@@ -24,7 +26,7 @@ Code and data for the analysis contained in [[1]](#1).
 Demo which replicates the MAD sequence with adaptive weigths for the illustrative example of Section 2.5.
 
 Ensure you have R (≥ 4.0) installed along with the mentioned packages.
-The source files contained in XXXXXXX.
+The source files are contained in the repository.
 ```r
 library(parallel)
 library(rmp)
