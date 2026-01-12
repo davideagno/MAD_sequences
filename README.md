@@ -21,7 +21,7 @@ Code and data for the analysis contained in [[1]](#1).
   - [corvus_2009.csv](corvus_2009.csv) contains the train test; [corvus_2010.csv](corvus_2010.csv) contains the test set; [sites_loc_09.csv](sites_loc_09.csv) contains the geographical information for each location.
 
 - [Figure_1.R](Figure_1.R) replicates Figure 1.
-- 
+- [Figure_2_and_3.R](Figure_2_and_3.R) replicates Figures 2 and 3.
 - [Illustrative_Example.R](Illustrative_Example.R) replicate the illustrative example of Section 2.5.
 
 ## Demo
@@ -38,10 +38,10 @@ library(ggplot2)
 library(latex2exp)
 
 # Load C++ functions
-Rcpp::sourceCpp("illustration_2.cpp")
+Rcpp::sourceCpp("illustration_functions.cpp")
 
 # Load R functions
-source("functions_mad_github.R")
+source("illustration_functions.R")
 ```
 
 We simulate data from a mixture of four Poisson distributions
