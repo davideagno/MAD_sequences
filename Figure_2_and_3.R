@@ -13,12 +13,13 @@ rn <- function(alpha, n) {
   1 / sum(1 / out ^ 2)
 } 
 drg <- function(x, mean, sd, left = -0.5) {
-  require(tmvtnorm)
   D <- length(c(x))
   out <- rep(NA, D)
   for (i in 1:D) {
-    out[i] <- ptmvnorm(lowerx = x[i]-0.5, upperx = x[i]+0.5, mean = mean, sigma = sd^2, lower = left)[1]
+    out[i] <- pnorm(x[i]+0.5, mean = mean, sd = sd) - pnorm(x[i]-0.5, mean = mean, sd = sd)
   }
+  out <- out / sum(out)
+  out[which(out <= 1e-250)] <- 1e-250
   out
 }
 drg_rev <- function(x, mean, sd, left = -0.5) {
@@ -28,6 +29,7 @@ drg_rev <- function(x, mean, sd, left = -0.5) {
   for (i in 1:D) {
     out[i] <- ptmvnorm(lowerx = x-0.5, upperx = x+0.5, mean = mean[i], sigma = sd^2, lower = left)[1]
   }
+  out[which(out <= 1e-250)] <- 1e-250
   out
 }
 var_p1 <- function(alpha, sd, x, p_0, support) {
@@ -89,10 +91,11 @@ cor_pn <- function(sd, x1, x2, alpha, p_n, N, support) {
   num / (den_1 * den_2)
 }
 
-supp <- 0:100
+supp <- 0:200
 alpha <- 1
 p_0 <- dpois(supp, lambda = 30) + dpois(supp, lambda = 55)
 p_0 <- p_0 / sum(p_0)
+p_0 <- 0.95 * p_0 + 0.05 * rep(1/length(supp), length(supp))
 plot(supp, p_0, type = "h")
 
 # Kernels
@@ -112,49 +115,119 @@ df_kk <- data.frame(supp = rep(supp, length(sd_grid)),
                     sigma = rep(sd_grid, each = length(supp)))
 kk <- ggplot(df_kk) +
   facet_wrap(~ sigma, nrow = 2, labeller = label_bquote(sigma == .(sigma)) ) +
-  geom_segment(aes(x = supp+0.2, xend = supp+0.2, y = 0, yend = k_0, color = "k0")) +
-  geom_segment(aes(x = supp-0.2, xend = supp-0.2, y = 0, yend = p_0, color = "pred")) +
-  geom_segment(aes(x = supp, xend = supp, y = 0, yend = kernel, color = "ker")) +
-  scale_color_tableau(name = "",
-                      palette = "Color Blind",
-                      labels = c("k0" = TeX(r'($k_{*}(y \;|\; y_n,\sigma)$)'), 
-                                 "ker" = TeX(r'($k_{n-1}(y \;|\; y_n,\sigma)$)'),
-                                 "pred" = TeX(r'($p_{n-1}(y)$)'))) +
+  geom_segment(aes(x = supp+0.2, xend = supp+0.2, y = 0, yend = k_0, color = "2_base")) +
+  geom_segment(aes(x = supp-0.2, xend = supp-0.2, y = 0, yend = p_0, color = "3_pred")) +
+  geom_segment(aes(x = supp, xend = supp, y = 0, yend = kernel, color = "1_ker")) +
+  scale_color_manual(name = "",
+                     values = c("2_base" = "#1170aa",
+                                "1_ker" = "#fc7d0b",
+                                "3_pred" = "#a3acb9"),
+                     labels = c("2_base" = TeX(r'($k_{*}(y \;|\; y_n,\sigma)$)'), 
+                                "1_ker" = TeX(r'($k_{n}(y \;|\; y_n,\sigma)$)'),
+                                "3_pred" = TeX(r'($p_{n-1}(y)$)'))) +
   labs(x = "Support", y = "Probability") +
+  xlim(c(0,100)) +
   theme_light() +
   theme(legend.position = "top",
+        axis.text = element_text(size = 8),
+        axis.title = element_text(size = 9),
         strip.text = element_text(size = 10, colour = "black"),
+        legend.text = element_text(size = 10),
         strip.background = element_rect(fill = "gray82"),
         panel.grid.major = element_line(size = 0.3, colour = "gray93"),
         panel.grid.minor = element_line(size = 0.15, colour = "gray93"))
 kk
-# ggsave(kk, filename = "ker_plot.pdf", width = 8, height = 7)
 
-
-kk_slide <- ggplot(df_kk) +
+ggplot(df_kk) +
   facet_wrap(~ sigma, nrow = 1, labeller = label_bquote(sigma == .(sigma)) ) +
-  geom_segment(aes(x = supp+0.2, xend = supp+0.2, y = 0, yend = k_0, color = "k0")) +
-  geom_segment(aes(x = supp-0.2, xend = supp-0.2, y = 0, yend = p_0, color = "pred")) +
-  geom_segment(aes(x = supp, xend = supp, y = 0, yend = kernel, color = "ker")) +
-  scale_color_tableau(name = "",
-                      palette = "Color Blind",
-                      labels = c("k0" = TeX(r'($k_{*}(y \;|\; y_n,\sigma)$)'), 
-                                 "ker" = TeX(r'($k_{n-1}(y \;|\; y_n,\sigma)$)'),
-                                 "pred" = TeX(r'($p_{n-1}(y)$)'))) +
+  geom_segment(aes(x = supp+0.2, xend = supp+0.2, y = 0, yend = k_0, color = "2_base")) +
+  geom_segment(aes(x = supp-0.2, xend = supp-0.2, y = 0, yend = p_0, color = "3_pred")) +
+  geom_segment(aes(x = supp, xend = supp, y = 0, yend = kernel, color = "1_ker")) +
+  scale_color_manual(name = "",
+                     values = c("2_base" = "#1170aa",
+                                "1_ker" = "#fc7d0b",
+                                "3_pred" = "#a3acb9"),
+                     labels = c("2_base" = TeX(r'($k_{*}(y \;|\; y_n,\sigma)$)'), 
+                                "1_ker" = TeX(r'($k_{n}(y \;|\; y_n,\sigma)$)'),
+                                "3_pred" = TeX(r'($p_{n-1}(y)$)'))) +
   labs(x = "Support", y = "Probability") +
   theme_light() +
   theme(legend.position = "top",
+        axis.text.y = element_text(size = 8),
+        axis.title.y = element_text(size = 9),
         strip.text = element_text(size = 10, colour = "black"),
+        legend.text = element_text(size = 10),
         strip.background = element_rect(fill = "gray82"),
         panel.grid.major = element_line(size = 0.3, colour = "gray93"),
         panel.grid.minor = element_line(size = 0.15, colour = "gray93"))
-kk_slide
-# ggsave(kk_slide, filename = "ker_plot_slide.pdf", width = 16, height = 4)
 
+
+# Gamma_n
+y_obs_1 <- 40
+idx_obs_1 <- which(supp == y_obs_1)
+sd_val <- seq(1e-100, 40, length = 200)
+gamma_val_1 <- k_star_obs_1 <- k_n_obs_1 <- rep(NA, length(sd_val))
+for (i in 1:length(gamma_val_1)) {
+  k_n <- mhk(p_0, y_obs_1, sd_val[i], supp)
+  k_star <- drg(supp, y_obs_1, sd_val[i])
+  gamma_val_1[i] <- k_n[idx_obs_1] - k_star[idx_obs_1]
+  k_star_obs_1[i] <- k_star[idx_obs_1]
+  k_n_obs_1[i] <- k_n[idx_obs_1]
+}
+plot(sd_val, gamma_val_1, type = "l", ylim = c(0,1))
+lines(sd_val, k_star_obs_1, col = 4)
+lines(sd_val, k_n_obs_1, col = 2)
+y_obs_2 <- 90
+idx_obs_2 <- which(supp == y_obs_2)
+sd_val <- seq(1e-100, 40, length = 200)
+gamma_val_2 <- k_star_obs_2 <- k_n_obs_2 <- rep(NA, length(sd_val))
+for (i in 1:length(gamma_val_2)) {
+  k_n <- mhk(p_0, y_obs_2, sd_val[i], supp)
+  k_star <- drg(supp, y_obs_2, sd_val[i])
+  gamma_val_2[i] <- k_n[idx_obs_2] - k_star[idx_obs_2]
+  k_star_obs_2[i] <- k_star[idx_obs_2]
+  k_n_obs_2[i] <- k_n[idx_obs_2]
+}
+plot(sd_val, gamma_val_2, type = "l", ylim = c(0,1))
+lines(sd_val, k_star_obs_2, col = 4)
+lines(sd_val, k_n_obs_2, col = 2)
+df_gamma <- data.frame(sd = rep(sd_val, 2),
+                       gamma = c(gamma_val_1, gamma_val_2),
+                       k_n_obs = c(k_n_obs_1, k_n_obs_2),
+                       k_star_obs = c(k_star_obs_1, k_star_obs_2),
+                       title = rep(c(y_obs_1, y_obs_2), each = length(sd_val)))
+gg <- ggplot(df_gamma) + 
+  facet_wrap(~ title, nrow = 2, labeller = label_bquote(y[n] == .(title))) +
+  geom_line(aes(x = sd, y = gamma, color = "3_gam")) +
+  geom_line(aes(x = sd, y = k_star_obs, color = "2_base")) +
+  geom_line(aes(x = sd, y = k_n_obs, color = "1_ker")) +
+  scale_color_manual(name = "",
+                     values = c("2_base" = "#1170aa",
+                                "1_ker" = "#fc7d0b",
+                                "3_gam" = "#57606c"),
+                     labels = c("2_base" = TeX(r'($k_{*}(y_n \;|\; y_n,\sigma)$)'),
+                                "1_ker" = TeX(r'($k_{n}(y_n \;|\; y_n,\sigma)$)'),
+                                "3_gam" = TeX(r'($r_n(y_n, \sigma)$)'))
+                      ) +
+  xlab(expression(sigma)) + ylab("Probability") +
+  theme_light() +
+  theme(legend.position = "top",
+        axis.text = element_text(size = 8),
+        axis.title = element_text(size = 9),
+        strip.text = element_text(size = 10, colour = "black"),
+        legend.text = element_text(size = 10),
+        strip.background = element_rect(fill = "gray82"),
+        panel.grid.major = element_line(size = 0.3, colour = "gray93"),
+        panel.grid.minor = element_line(size = 0.15, colour = "gray93"))
+gg
+
+pp <- ggpubr::ggarrange(kk, gg, ncol = 2, widths = c(1.7,1))
+pp
+# ggsave(pp, filename = "kernels.pdf", width = 11, height = 7)
 
 
 # Variance
-show_col(tableau_color_pal("Color Blind")(10))
+scales::show_col(tableau_color_pal("Color Blind")(10))
 nn <- 50
 sd_val <- seq(1e-100, 40, length = 200)
 vv_20 <- vv_40 <- vv_60 <- vv_80 <- rep(NA, length(sd_val))
@@ -232,4 +305,3 @@ cc
 
 cv <- ggpubr::ggarrange(vv, cc, ncol = 2)
 cv
-# ggsave(cv, filename = "cor_var_plot.pdf", width = 11, height = 6)
