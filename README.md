@@ -1,6 +1,6 @@
 # Supporting information for "Nonparametric predictive inference for discrete data via Metropolis-adjusted Dirichlet sequences"
 
-Code and data for the analysis contained in [[1]](#1).
+Code and data for the analysis contained in [Agnoletto, Rigon & Dunson (2025)](#1).
 
 - #### Regression
    - [regr_ada.R](regr_ada.R), [regr_dpm.R](regr_dpm.R), [regr_1.R](regr_1.R), and [regr_23.R](regr_23.R) contain the R code for replicating the simulation study of Section 4.2 for MAD sequences with adaptive weigths, $w_n=(2n - 1) / (n^2 + n)$, $w_n=(\alpha +n )^{-1}$, and $w_n=(\alpha +n )^{-2/3}$, respectively.
