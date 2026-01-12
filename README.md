@@ -20,6 +20,8 @@ Code and data for the analysis contained in [[1]](#1).
   - [post_processing_plots.R](post_processing_plots.R), [post_processing_plots.R](post_processing_plots.R), and [convergence.R](convergence.R) contain the code for obtaining the related figures.
   - [corvus_2009.csv](corvus_2009.csv) contains the train test; [corvus_2010.csv](corvus_2010.csv) contains the test set; [sites_loc_09.csv](sites_loc_09.csv) contains the geographical information for each location.
 
+- [Figure_1.R](Figure_1.R) replicates Figure 1.
+- 
 - [Illustrative_Example.R](Illustrative_Example.R) replicate the illustrative example of Section 2.5.
 
 ## Demo
