@@ -1,12 +1,11 @@
 
 rm(list = ls())
-setwd("/hpc/group/dunsonlab/da252/review")
 
 library(Rcpp)
 library(RcppArmadillo)
 library(SparseArray)
 
-Rcpp::sourceCpp("appl_function_2.cpp")
+Rcpp::sourceCpp("Functions_Corvids_2.cpp")
 source("Functions_appl.R")
 D <- 4
 supp <- 0:50
