@@ -7,8 +7,10 @@ Code and data for the analysis contained in [[1]](#1).
   - xx
 
 - #### Classification
-  - xx
-  - xx
+  - [class_ada.R](class_ada.R), [class_dpm.R](class_dpm.R), and [class_lambda.R](class_lambda.R) contain the R code for replicating the simulation study of Section 4.2 for MAD sequences with adaptive weigths, $w_n=(2n - 1) / (n^2 + n)$, and $w_n=(\alpha +n )^{-\lambda}$, respectively.
+  - [Functions_Class_ada.R](Functions_Class_ada.R), [Functions_Class_dpm.R](Functions_Class_dpm.R), and [Functions_Class_lambda.R](Functions_Class_lambda.R) contain the functions for MAD sequences with adaptive weigths, $w_n=(2n - 1) / (n^2 + n)$, and $w_n=(\alpha +n )^{-\lambda}$, respectively. [Functions_Class.cpp](Functions_Class.cpp) contains useful Cpp functions.
+  - [class_ada.R](class_DP.R) and [class_glm_bart_rf.R](class_glm_bart_rf.R) contains the R code to replicate the competitors.
+  - [output_class.R](output_class.R) contains the code for obtaining the related tables.
 
 - #### Application
   - [application.R](application.R) contains the analysis of Section 5. [predictive_resampling.R](predictive_resampling.R) contains the code for predictive resampling.
