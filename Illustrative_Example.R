@@ -73,7 +73,7 @@ ps_dp <- pred_res(y, pred_dp, alpha, LL, N_star, supp, N, B, sd_dp)
 ci_low_dp <- apply(ps_dp, 1, emp_hpd_lower); ci_upp_dp <- apply(ps_dp, 1, emp_hpd_upper)
 
 
-
+# Figure 4 - left and central columns
 df <- data.frame(supp = rep(supp, 4),
                  pm = c(pm_1, pred_2, pred_dp, pm_rgdpm),
                  ci_low = c(ci_low_1, ci_low_2, ci_low_dp, ci_low_rgdpm),
@@ -106,7 +106,7 @@ ggplot(df) +
 
 
 
-# CONVERGENCE of MARTINGALE for P(Y<26)
+# CONVERGENCE of MARTINGALE for P(Y<26) (Figure 4 - bottom right panel)
 LL <- 0.75
 N_star <- 500
 y_val <- 26
@@ -142,7 +142,7 @@ pl_conv_val
 
 
 
-# CONVERGENCE of P_n in L_1
+# CONVERGENCE of P_n in L_1 (Figure S5 in the Supplement)
 LL <- 0.75
 N_star <- 500
 cc <- pred_res_conv(y, pred_2, alpha, LL, N_star, supp, N = 20000, B = 100, 
@@ -176,7 +176,7 @@ pl_conv
 
 
 
-# MARTINGALE POSTERIOR for P(Y<26)
+# MARTINGALE POSTERIOR for P(Y<26) (Figure 4 - top right panel)
 y_val <- 26
 ps_mar_1 <- apply(ps_1, 2, function(x) sum(x[1:y_val]))
 ps_mar_2 <- apply(ps_2, 2, function(x) sum(x[1:y_val]))
