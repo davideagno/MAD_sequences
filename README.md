@@ -17,7 +17,7 @@ Code and data for the analysis contained in [Agnoletto, Rigon & Dunson (2025)](#
 - #### Application
   - [application.R](application.R) contains the analysis of Section 5. [predictive_resampling.R](predictive_resampling.R) contains the code for predictive resampling.
   - [Functions_Corvids.R](Functions_Corvids.R), [Functions_Corvids_ps.R](Functions_Corvids_ps.R), [Functions_Corvids.cpp](Functions_Corvids.cpp), and [Functions_Corvids_2.cpp](Functions_Corvids_2.cpp) contains the R and Cpp functions for MAD seqeunces employed in the application.
-  - [post_processing_plots.R](post_processing_plots.R), [post_processing_plots.R](post_processing_plots.R), and [convergence.R](convergence.R) contain the code for obtaining the related figures.
+  - [post_processing_plots.R](post_processing_plots.R), [post_processing_correlation.R](post_processing_correlation.R), and [convergence.R](convergence.R) contain the code for obtaining the related figures.
   - [corvus_2009.csv](corvus_2009.csv) contains the train test; [corvus_2010.csv](corvus_2010.csv) contains the test set; [sites_loc_09.csv](sites_loc_09.csv) contains the geographical information for each location.
 
 - [Figure_1.R](Figure_1.R) replicates Figure 1.
