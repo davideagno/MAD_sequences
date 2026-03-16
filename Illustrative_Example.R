@@ -212,3 +212,59 @@ pl_mart <- ggplot(df) +
         legend.position = "top")
 pl_mart
 
+
+
+# EMPIRICAL CONSISTENTCY
+# (Figure S4 of the Supplement)
+hellinger <- function(p, q) sqrt(sum((sqrt(p) - sqrt(q))^2)) / sqrt(2)
+n_val <- c(seq(0, 1000, by = 10),
+           seq(1050, 2000, by = 50),
+           seq(2100, 5000, by = 100),
+           seq(5250, 50000, by = 150))
+h_dp <- h_1 <- h_2 <- rep(NA, length(n_val)-1)
+n <- n_val[2]
+idx <- 1
+extra_n <- n_val[2]
+set.seed(1)
+yy <- sample(c(1, 18, 40, 62), size = n, replace = TRUE, prob = c(3,2,3,2))
+for (i in 1:n) {
+  yy[i] <- rpois(1, lambda = yy[i])
+}
+p_2 <- pred_mad(yy, p_0, alpha, 0.75, 500, sd_2, supp, 1)
+h_2[idx] <- hellinger(p_2, p_true)
+for (j in 3:length(n_val)) {
+  n <- n_val[j]
+  idx <- j - 1
+  extra_n <- n - n_val[j-1]
+  print(idx)
+  
+  set.seed(1*j)
+  y_new <- sample(c(1, 18, 40, 62), size = extra_n, replace = TRUE, prob = c(3,2,3,2))
+  for (i in 1:extra_n) {
+    y_new[i] <- rpois(1, lambda = y_new[i])
+  }
+  yy <- c(yy, y_new)
+  
+  p_2 <- pred_mad_cons(y_new, n, p_2, alpha, 0.75, 500, sd_2, supp, 1)
+  h_2[idx] <- hellinger(p_2, p_true)
+}
+df_h <- data.frame(n_val = n_val[-1], mad_2 = h_2, title = "Empirical consistency")
+cons_plot <- ggplot(df_h) + 
+  facet_wrap(~ title) +
+  geom_line(aes(x = n_val, y = mad_2), color = "black") +
+  labs(x = "Sample size", y = "Hellinger distance") +
+  theme_light() +
+  theme(legend.text.align = 0,
+        strip.text = element_text(size = 15, colour = "black"),
+        strip.background = element_rect(fill = "gray82"),
+        panel.grid.major = element_line(size = 0.3, colour = "gray93"),
+        panel.grid.minor = element_line(size = 0.15, colour = "gray93"),
+        axis.text = element_text(size = 12),
+        axis.title = element_text(size = 15),
+        legend.title = element_text(size = 10),
+        legend.text = element_text(size = 13),
+        plot.title = element_text(hjust = 0.5),
+        legend.position = "top")
+cons_plot
+# ggsave(cons_plot, filename = "emp_cons.pdf", width = 9, height = 6)
+
