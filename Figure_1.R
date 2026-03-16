@@ -209,6 +209,7 @@ for (i in 1:length(supp)) freq_obs[i] <- sum(y == supp[i])
 freq_obs <- freq_obs / sum(freq_obs)
 
 
+# Figure 1
 df <- data.frame(supp = rep(supp, 2),
                  p_mad = c(p_n_1, p_n_dp),
                  setting = rep(c("MAD", "DP"), each = length(supp)),
