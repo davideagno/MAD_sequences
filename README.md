@@ -5,7 +5,7 @@ Code and data for the analysis contained in [Agnoletto, Rigon & Dunson (2025)](#
 - #### Regression
    - [regr_ada.R](regr_ada.R), [regr_dpm.R](regr_dpm.R), [regr_1.R](regr_1.R), and [regr_23.R](regr_23.R) contain the R code for replicating the simulation study of Section 4.2 for MAD sequences with adaptive weigths, $w_n=(2n - 1) / (n^2 + n)$, $w_n=(\alpha +n )^{-1}$, and $w_n=(\alpha +n )^{-2/3}$, respectively.
   - [Functions_Regr_ada.R](Functions_Regr_ada.R), [Functions_Regr_dpm.R](Functions_Regr_dpm.R), [Functions_Regr_1.R](Functions_Regr_1.R), and [Functions_Regr_23.R](Functions_Regr_23.R) contain the functions for MAD sequences with adaptive weigths, $w_n=(2n - 1) / (n^2 + n)$, $w_n=(\alpha +n )^{-1}$, and $w_n=(\alpha +n )^{-2/3}$, respectively. [Functions_Regr.cpp](Functions_Regr.cpp) contains useful Cpp functions.
-  - [regr_ada.R](class_DP.R) and [regr_glm_bart_rf.R](class_glm_bart_rf.R) contains the R code to replicate the competitors.
+  - [regr_ada.R](regr_DP.R) and [regr_glm_bart_rf.R](regre_glm_bart_rf.R) contains the R code to replicate the competitors.
   - [output_regr.R](output_regr.R) contains the code for obtaining the related tables.
 
 - #### Classification
