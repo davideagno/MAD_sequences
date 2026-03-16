@@ -113,7 +113,7 @@ mean(abs(as.matrix(y_test) - gllvm_zinb_exp))
 
 
 
-# FIGURE: Correlation matrices
+# FIGURE: Correlation matrices (Figure S8 of the Supplement)
 cor_names <- c("CC", "EM", "CR", "EJ")
 cor_emp <- cor(y)
 colnames(cor_emp) <- rownames(cor_emp) <- cor_names
