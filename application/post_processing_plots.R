@@ -17,6 +17,7 @@ load("pred_a.RData")
 
 
 # CI predictive conditional - CROWS across TEMPERATURES
+# (Figure 6)
 ps_cc_t1 <- ps_cc_t2 <- ps_cc_t3 <- matrix(nrow = NCOL(ps), ncol = 51)
 for (s in 1:NCOL(ps)) {
   print(s)
@@ -83,6 +84,7 @@ pl_cct
 
 
 # CORVIDS in URBAN HABITAT
+# (Figure 5 - right panel)
 ps_urb <- matrix(nrow = NCOL(ps), ncol = 4)
 for (i in 1:NCOL(ps)) {
   print(i)
@@ -153,15 +155,15 @@ pl_urb <- ggplot(df_urb) +
 pl_urb
 
 
-
-pl_appl_slide_2 <- ggarrange(pl_urb, pl_cct_cold)
-pl_appl_slide_2
+# pl_appl_slide_2 <- ggarrange(pl_urb, pl_cct_cold)
+# pl_appl_slide_2
 # ggsave(pl_appl_slide_2, filename = "pl_appl_slide_2.pdf", width = 12, height = 6)
 
 
 
 
 # MAGPIES across HABITATS
+# (Figure S9 of the Supplement)
 ps_emh <- matrix(nrow = NCOL(ps), ncol = 5)
 for (i in 1:NCOL(ps)) {
   print(i)
@@ -238,6 +240,7 @@ pl_emh
 
 
 # PS for correlation
+# (Figure 5 - left panel)
 load("ps_correlation.RData")
 robustBLME::hpd(cor_cc_em)
 df_cor <- data.frame(c1 = cor_cc_em, c2 = cor_cc_cr, c3 = cor_cc_ej, c4 = cor_em_cr, 
@@ -281,6 +284,7 @@ pl_cor <- ggplot(df_cor) +
         legend.position = "top")
 pl_cor
 
+# Figure 5
 library(ggpubr)
 pl_main <- ggarrange(pl_cor, pl_urb)
 pl_main
@@ -288,6 +292,7 @@ pl_main
 
 
 # COVARIATES MAP
+# (Figure S7 of the Supplement)
 library(sf)
 library(giscoR)
 library(dplyr)
