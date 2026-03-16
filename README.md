@@ -23,6 +23,7 @@ Code and data for the analysis contained in [Agnoletto, Rigon & Dunson (2025)](#
 - [Figure_1.R](Figure_1.R) replicates Figure 1.
 - [Figure_2_and_3.R](Figure_2_and_3.R) replicates Figures 2 and 3.
 - [Illustrative_Example.R](Illustrative_Example.R), [illustration_functions.R](illustration_functions.R), and [illustration_functions.cpp](illustration_functions.cpp) replicate the illustrative example of Section 2.5.
+- [sensitivity_analysis.R](sensitivity_analysis.R) replicates Figure S3 of the Supplement
 
 ## Demo
 Demo which replicates the MAD sequence with adaptive weigths for the illustrative example of Section 2.5.
